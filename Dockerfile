@@ -1,11 +1,9 @@
-FROM python:3.10-slim
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 
 RUN apt update && apt install -y \
-    ninja-build \
-    cmake \
-    build-essential \
-    git wget ffmpeg libgl1 unzip \
-    && apt clean
+    python3.10 python3-pip \
+    build-essential cmake git ninja-build ffmpeg \
+    libgl1 unzip wget && apt clean
 
 WORKDIR /app
     
