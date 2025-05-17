@@ -1,0 +1,17 @@
+services:
+  comfyui:
+    build: .
+    container_name: wig_stick
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./wig_stick:/app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    runtime: nvidia
