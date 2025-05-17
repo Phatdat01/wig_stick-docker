@@ -1,3 +1,5 @@
+FROM nvidia/cuda:12.1.1-runtime-ubuntu20.04
+
 RUN apt update && apt install -y \
     git python3 python3-pip wget ffmpeg libgl1 unzip \
     && apt clean
