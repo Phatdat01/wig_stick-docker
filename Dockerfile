@@ -1,9 +1,15 @@
-FROM nvidia/cuda:12.1.1-runtime-ubuntu20.04
+FROM python:3.10-slim
 
 RUN apt update && apt install -y \
     git python3 python3-pip wget ffmpeg libgl1 unzip \
     && apt clean
+    
+RUN apt update && apt install -y \
+    cmake \
+    build-essential
 
+WORKDIR /app
+    
 # Clone source
 # RUN git clone https://github.com/Phatdat01/wig_stick.git /app
 
@@ -12,15 +18,16 @@ RUN apt update && apt install -y \
 #     rm -rf /tmp/HairFastGAN
 
 # Sao chép mã nguồn vào container
+
+    
 COPY ./wig_stick /app
 
-WORKDIR /app
 
 # Cài Python requirements
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirement.txt
 
 # Cổng mặc định
 EXPOSE 5000
 
 # Lệnh khởi chạy
-CMD ["python3", "api.py"]
+CMD ["python3", "main.py", "--listen", "0.0.0.0"]
