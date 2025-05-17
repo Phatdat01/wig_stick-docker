@@ -7,6 +7,10 @@ RUN apt update && apt install -y \
 # Clone source
 # RUN git clone https://github.com/Phatdat01/wig_stick.git /app
 
+# RUN git clone https://github.com/camenduru/HairFastGAN.git /tmp/HairFastGAN && \
+#     mv /tmp/HairFastGAN/pretrained_models /app && \
+#     rm -rf /tmp/HairFastGAN
+
 # Sao chép mã nguồn vào container
 COPY ./wig_stick /app
 
@@ -19,4 +23,4 @@ RUN pip3 install -r requirements.txt
 EXPOSE 5000
 
 # Lệnh khởi chạy
-CMD ["python3", "api.py", "--listen", "0.0.0.0"]
+CMD ["python3", "api.py"]
