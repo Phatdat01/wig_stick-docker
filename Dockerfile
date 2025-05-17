@@ -1,12 +1,11 @@
 FROM python:3.10-slim
 
 RUN apt update && apt install -y \
+    ninja-build \
+    cmake \
+    build-essential \
     git python3 python3-pip wget ffmpeg libgl1 unzip \
     && apt clean
-    
-RUN apt update && apt install -y \
-    cmake \
-    build-essential
 
 WORKDIR /app
     
@@ -21,7 +20,6 @@ WORKDIR /app
 
     
 COPY ./wig_stick /app
-
 
 # Cài Python requirements
 RUN pip3 install -r requirement.txt
