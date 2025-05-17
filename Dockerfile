@@ -4,7 +4,7 @@ RUN apt update && apt install -y \
     ninja-build \
     cmake \
     build-essential \
-    git python3 python3-pip wget ffmpeg libgl1 unzip \
+    git wget ffmpeg libgl1 unzip \
     && apt clean
 
 WORKDIR /app
