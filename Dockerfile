@@ -15,7 +15,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
     ln -sf /usr/bin/pip3 /usr/bin/pip
-    
+
+WORKDIR /app
+
 # Clone source
 # RUN git clone https://github.com/Phatdat01/wig_stick.git /app
 
@@ -25,11 +27,10 @@ RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
 
 # Sao chép mã nguồn vào container
 
-    
 COPY ./wig_stick /app
 
 # Cài Python requirements
-RUN pip3 install -r requirement.txt
+RUN pip3 install -r /app/requirement.txt
 
 RUN pip3 install ninja
 # Cổng mặc định
