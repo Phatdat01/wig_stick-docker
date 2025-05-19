@@ -1,4 +1,6 @@
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+
+ENV PATH="/usr/local/cuda/bin:${PATH}"
 
 RUN apt update && apt install -y \
     python3.10 python3-pip \
