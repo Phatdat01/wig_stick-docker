@@ -5,14 +5,14 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 ENV TORCH_CUDA_ARCH_LIST="8.6"
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.10 python3-pip python3.10-dev \
-    git curl unzip build-essential \
-    libgl1-mesa-glx libglib2.0-0 \
-    ninja-build
+    build-essential cmake git curl wget unzip ffmpeg ninja-build \
+    libgl1 libglib2.0-0 libsm6 libxrender1 libxext6 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
-RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
+    ln -sf /usr/bin/pip3 /usr/bin/pip
 
 WORKDIR /app
 
@@ -37,4 +37,4 @@ RUN pip3 install -r /app/requirement.txt
 EXPOSE 5000
 
 # Lệnh khởi chạy
-CMD ["python3", "api.py", "--listen", "0.0.0.0"]
+CMD ["python3", "api.py"]
