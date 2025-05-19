@@ -1,11 +1,12 @@
-FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 
 ENV PATH="/usr/local/cuda/bin:${PATH}"
 
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y \
     python3.10 python3-pip \
     build-essential cmake git ninja-build ffmpeg \
-    libgl1 unzip wget && apt clean
+    libgl1 unzip wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
     
@@ -21,6 +22,7 @@ WORKDIR /app
     
 COPY ./wig_stick /app
 
+RUN python3.10 -m pip install --upgrade pip
 # Cài Python requirements
 RUN pip3 install -r requirement.txt
 
