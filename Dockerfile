@@ -25,6 +25,7 @@ RUN python3.10 -m pip install --upgrade pip
 # Cài Python requirements
 RUN pip3 install -r requirement.txt
 
+RUN pip3 install ninja
 # Cổng mặc định
 EXPOSE 5000
 
