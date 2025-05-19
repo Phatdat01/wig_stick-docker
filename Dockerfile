@@ -1,13 +1,20 @@
-FROM python:3.10-slim
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 
-ENV PATH="/usr/local/cuda/bin:${PATH}"
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive \
+    TZ=Etc/UTC \
+    TORCH_CUDA_ARCH_LIST="8.6" \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-RUN apt-get update && apt-get install -y \
-    build-essential cmake git ninja-build ffmpeg \
-    libgl1 unzip wget && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.10 python3-pip python3.10-dev \
+    build-essential cmake git curl wget unzip ffmpeg ninja-build \
+    libgl1 libglib2.0-0 libsm6 libxrender1 libxext6 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
+    ln -sf /usr/bin/pip3 /usr/bin/pip
     
 # Clone source
 # RUN git clone https://github.com/Phatdat01/wig_stick.git /app
@@ -21,7 +28,6 @@ WORKDIR /app
     
 COPY ./wig_stick /app
 
-RUN python3.10 -m pip install --upgrade pip
 # Cài Python requirements
 RUN pip3 install -r requirement.txt
 
