@@ -34,7 +34,7 @@ RUN pip3 install ninja
 
 RUN pip3 install -r /app/requirement.txt
 
-RUN python -c "import torch; print('CUDA available:', torch.cuda.is_available()); print(torch.load('pretrained_models/StyleGAN/ffhq.pt').keys())"
+RUN pip install --force-reinstall --no-cache-dir numpy
 
 # Cổng mặc định
 EXPOSE 5000
