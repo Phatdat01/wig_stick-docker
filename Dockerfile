@@ -32,6 +32,8 @@ RUN pip install --force-reinstall --no-cache-dir numpy
 
 RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu118
 
+RUN python3 -c "import torch; print('CUDA available:', torch.cuda.is_available())"
+
 RUN pip3 install ninja
 
 RUN pip3 install -r /app/requirement.txt
