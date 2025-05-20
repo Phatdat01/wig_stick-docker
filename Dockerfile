@@ -28,13 +28,14 @@ WORKDIR /app
 COPY ./wig_stick /app
 
 # Cài Python requirements
-RUN pip3 install torch==2.1.0+cu118 torchvision==0.16.0+cu118 torchaudio==2.1.0 --extra-index-url https://download.pytorch.org/whl/cu118
+RUN pip install --force-reinstall --no-cache-dir numpy
+
+RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu118
 
 RUN pip3 install ninja
 
 RUN pip3 install -r /app/requirement.txt
 
-RUN pip install --force-reinstall --no-cache-dir numpy
 
 # Cổng mặc định
 EXPOSE 5000
