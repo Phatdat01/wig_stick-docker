@@ -33,6 +33,9 @@ RUN pip3 install torch==2.1.0+cu118 torchvision==0.16.0+cu118 torchaudio==2.1.0 
 RUN pip3 install ninja
 
 RUN pip3 install -r /app/requirement.txt
+
+RUN python -c "import torch; print('CUDA available:', torch.cuda.is_available()); print(torch.load('pretrained_models/StyleGAN/ffhq.pt').keys())"
+
 # Cổng mặc định
 EXPOSE 5000
 
