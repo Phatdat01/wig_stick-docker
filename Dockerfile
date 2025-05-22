@@ -41,6 +41,5 @@ RUN pip3 install -r /app/requirement.txt
 # Cổng mặc định
 EXPOSE 5000
 
-ENV PYTHONUNBUFFERED=1
 # Lệnh khởi chạy
 CMD ["python3", "-u", "api.py"]
