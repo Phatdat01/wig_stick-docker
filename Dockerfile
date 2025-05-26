@@ -25,7 +25,6 @@ WORKDIR /app
 
 # Sao chép mã nguồn vào container
 
-COPY ./wig_stick /app
 
 # Cài Python requirements
 RUN pip install --force-reinstall --no-cache-dir numpy
@@ -35,6 +34,8 @@ RUN pip3 install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url 
 RUN pip3 install ninja
 
 RUN python3 -c "import torch; print('CUDA available:', torch.cuda.is_available())"
+
+COPY ./wig_stick /app
 
 RUN pip3 install -r /app/requirement.txt
 
