@@ -43,4 +43,4 @@ RUN pip3 install -r /app/requirement.txt
 EXPOSE 5000
 
 # Lệnh khởi chạy
-CMD ["python3", "-u", "api.py"]
+CMD ["python", "api.py", "--host", "0.0.0.0", "--port", "5000"]
